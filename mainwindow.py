@@ -156,23 +156,32 @@ class Patients(QDialog):
         print(phoneAuthorizedPerson)
 
         if self.womanRadioButton.isChecked():
-               sex = 'kobieta'
+            sex = 'kobieta'
         elif self.menRadioButton.isChecked():
-                sex = 'mężczyzna'
+            sex = 'mężczyzna'
 
-        dane = [name, surname, pesel, birthdate, street, houseNumer, flat, city, postCode, phone, email, nameAuthorizedPerson, surnameAuthorizedPerson, peselAuthorizedPerson, phoneAuthorizedPerson, sex]
+        dane = [name, surname, pesel, birthdate, street, houseNumer, flat, city, postCode, phone, email,
+                nameAuthorizedPerson, surnameAuthorizedPerson, peselAuthorizedPerson, phoneAuthorizedPerson, sex]
 
+        empty = 0
         for x in dane:
             if x != "":
-                try:
-                    cur = connection.cursor()
-                    cur.execute("Insert into patients(Name, Surname, Pesel, BirthDate, Street, House, Flat, City, PostCode, Phone, Mail, NameAuthorizedPerson, SurnameAuthorizedPerson, PeselAuthorizedPerson, PhoneAuthorizedPerson, Sex) values('" + name + "', '" + surname + "', '" + pesel + "', '" + birthdate + "', '" + street + "', '" + houseNumer + "', '" + flat + "', '" + city + "', '" + postCode + "', '" + phone + "', '" + email + "', '" + nameAuthorizedPerson + "', '" + surnameAuthorizedPerson + "', '" + peselAuthorizedPerson + "', '" + phoneAuthorizedPerson + "', '" + sex + "')")
-                    connection.commit()
-                    self.messagebox()
-                except Exception as e:
-                    print(str(e))
+                empty = 1
             else:
-                self.messageboxEmpty()
+                empty = 2
+
+        if empty == 1:
+            try:
+                cur = connection.cursor()
+                cur.execute(
+                    "Insert into patients(Name, Surname, Pesel, BirthDate, Street, House, Flat, City, PostCode, Phone, Mail, NameAuthorizedPerson, SurnameAuthorizedPerson, PeselAuthorizedPerson, PhoneAuthorizedPerson, Sex) values('" + name + "', '" + surname + "', '" + pesel + "', '" + birthdate + "', '" + street + "', '" + houseNumer + "', '" + flat + "', '" + city + "', '" + postCode + "', '" + phone + "', '" + email + "', '" + nameAuthorizedPerson + "', '" + surnameAuthorizedPerson + "', '" + peselAuthorizedPerson + "', '" + phoneAuthorizedPerson + "', '" + sex + "')")
+                connection.commit()
+                self.messagebox()
+            except Exception as e:
+                print(str(e))
+
+        else:
+            self.messageboxEmpty()
 
 
 class Register(QDialog):
@@ -259,14 +268,11 @@ class ShowPatients(QDialog):
         cur.execute(queryCount)
         count = cur.fetchall()
 
-        patients = []
-
         for rowCount in count:
-            if(rowCount[0]) == 0:
+            if (rowCount[0]) == 0:
                 self.listWidget.addItem("BRAK DANYCH W BAZIE")
             if (rowCount[0]) != 0:
                 for row in value:
-
                     self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
 
 
@@ -327,11 +333,10 @@ class ShowPatients(QDialog):
         count = cur.fetchall()
 
         for rowCount in count:
-            if(rowCount[0]) == 0:
+            if (rowCount[0]) == 0:
                 self.listWidget.addItem("BRAK DANYCH W BAZIE")
             if (rowCount[0]) != 0:
                 for row in value:
-
                     self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
 
 
@@ -374,9 +379,8 @@ class RegisterVisit(QDialog):
         for row2 in idPatient:
             idPatient = row2[0]
 
-
-        #time = self.timeEdit.time()
-        #print(time)
+        # time = self.timeEdit.time()
+        # print(time)
 
         # Poprawić - wyświetlanie pacjentów
         # Dodawanie wizyty - komunikaty, dodanie godziny wizyty.
@@ -385,13 +389,13 @@ class RegisterVisit(QDialog):
         # table Patients - Pesel, Surname, name
         # table Visit - Date, Time, Doktor (table Doctors)
 
-
         print(idPatient)
         print(choosedata)
         print(idDoctor)
 
         cur = connection.cursor()
-        cur.execute("Insert into visit(idDoctor, idPatient, dateVisit) values('" + str(idDoctor) + "', '" + str(idPatient) + "', '" + str(choosedata) + "');")
+        cur.execute("Insert into visit(idDoctor, idPatient, dateVisit) values('" + str(idDoctor) + "', '" + str(
+            idPatient) + "', '" + str(choosedata) + "');")
         connection.commit()
 
 
@@ -422,11 +426,10 @@ class ShowVisits(QDialog):
         count = cur.fetchall()
 
         for rowCount in count:
-            if(rowCount[0]) == 0:
+            if (rowCount[0]) == 0:
                 self.listWidget.addItem("BRAK DANYCH W BAZIE")
             if (rowCount[0]) != 0:
                 for row in value:
-
                     self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
 
     def valueFind(self):
@@ -486,13 +489,11 @@ class ShowVisits(QDialog):
         count = cur.fetchall()
 
         for rowCount in count:
-            if(rowCount[0]) == 0:
+            if (rowCount[0]) == 0:
                 self.listWidget.addItem("BRAK DANYCH W BAZIE")
             if (rowCount[0]) != 0:
                 for row in value:
-
                     self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
-
 
 
 if __name__ == '__main__':
