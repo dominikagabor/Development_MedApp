@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>554</width>
-    <height>443</height>
+    <height>459</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,16 +27,16 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>350</y>
+     <y>360</y>
      <width>321</width>
      <height>20</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="doctorsLabel">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>30</x>
      <y>10</y>
      <width>51</width>
      <height>31</height>
@@ -47,6 +47,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Lekarz:</string>
    </property>
@@ -54,18 +57,18 @@
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>30</x>
      <y>40</y>
      <width>331</width>
      <height>21</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="dateLabel">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>70</y>
+     <x>30</x>
+     <y>80</y>
      <width>51</width>
      <height>16</height>
     </rect>
@@ -75,34 +78,19 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Data:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="peselLabel">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>320</y>
-     <width>101</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Pesel pacjenta</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="saveButton">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>390</y>
-     <width>81</width>
+     <x>110</x>
+     <y>331</y>
+     <width>141</width>
      <height>31</height>
     </rect>
    </property>
@@ -110,6 +98,30 @@
     <font>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
+   <property name="text">
+    <string>Pesel pacjenta:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="saveButton">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>400</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(34, 148, 255); color: rgb(255, 255, 255)</string>
    </property>
    <property name="text">
     <string>Zapisz</string>
@@ -118,9 +130,9 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>390</y>
-     <width>81</width>
+     <x>290</x>
+     <y>400</y>
+     <width>141</width>
      <height>31</height>
     </rect>
    </property>
@@ -128,6 +140,9 @@
     <font>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(34, 148, 255); color: rgb(255, 255, 255)</string>
    </property>
    <property name="text">
     <string>Anuluj</string>
@@ -142,12 +157,19 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="time">
+    <time>
+     <hour>14</hour>
+     <minute>0</minute>
+     <second>0</second>
+    </time>
+   </property>
   </widget>
-  <widget class="QLabel" name="time_label">
+  <widget class="QLabel" name="timeLabel">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>70</y>
+     <x>390</x>
+     <y>80</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -156,6 +178,9 @@
     <font>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Godzina:</string>

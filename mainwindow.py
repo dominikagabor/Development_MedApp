@@ -248,7 +248,7 @@ class ShowPatients(QDialog):
         super(ShowPatients, self).__init__()
         loadUi('gui/showPatientsGui.ui', self)
         self.valueFindButton.clicked.connect(self.valueFind)
-        self.comboboxButton.clicked.connect(self.comboBoxFilters)
+        self.valueFindComboboxButton.clicked.connect(self.comboBoxFilters)
 
         self.comboBox.addItem("-")
         self.comboBox.addItem("daty urodzenia rosnąco")
@@ -320,10 +320,11 @@ class ShowPatients(QDialog):
 
         self.listWidget.clear()
         cur = connection.cursor()
-        if valueFind is not None:
-            query = "select Pesel, Surname, Name from patients where Surname = '" + valueFind + "' OR Name = '" + valueFind + "' OR Pesel = '" + valueFind + "' OR City = '" + valueFind + "' OR PostCode = '" + valueFind + "' OR Phone = '" + valueFind + "' OR Street = '" + valueFind + "' OR Mail = '" + valueFind + "'" + dod
-        else:
+        if valueFind == "":
             query = "select Pesel, Surname, Name from patients " + dod
+        else:
+            query = "select Pesel, Surname, Name from patients where Surname = '" + valueFind + "' OR Name = '" + valueFind + "' OR Pesel = '" + valueFind + "' OR City = '" + valueFind + "' OR PostCode = '" + valueFind + "' OR Phone = '" + valueFind + "' OR Street = '" + valueFind + "' OR Mail = '" + valueFind + "'" + dod
+
         cur.execute(query)
         value = cur.fetchall()
 
@@ -342,7 +343,7 @@ class ShowPatients(QDialog):
 class RegisterVisit(QDialog):
     def __init__(self):
         super(RegisterVisit, self).__init__()
-        loadUi('gui/RegisterVisit.ui', self)
+        loadUi('gui/registerVisitGui.ui', self)
         self.saveButton.clicked.connect(self.datechoose)
 
         cur = connection.cursor()
@@ -354,8 +355,11 @@ class RegisterVisit(QDialog):
             self.comboBox.addItem(str(row[0]))
 
     def messagebox(self):
-        QMessageBox.information(self, 'Komunikat', 'Podany pesel nie istnieje w bazie')
+        QMessageBox.information(self, 'Komunikat', 'Wizyta dodana poprawnie')
         self.close()
+
+    def messageboxEmptyPatient(self):
+        QMessageBox.information(self, 'Komunikat', 'Podany pesel nie istnieje w bazie')
 
     def datechoose(self):
         nameDoctor = self.comboBox.currentText()
@@ -377,6 +381,15 @@ class RegisterVisit(QDialog):
 
         for row2 in idPatient:
             idPatient = row2[0]
+        if str(idPatient) == '[]':
+            self.messageboxEmptyPatient()
+        else:
+            cur = connection.cursor()
+            cur.execute("Insert into visit(idDoctor, idPatient, dateVisit) values('" + str(idDoctor) + "', '" + str(
+                idPatient) + "', '" + str(choosedata) + "');")
+            connection.commit()
+            self.messagebox()
+
 
         # time = self.timeEdit.time()
         # print(time)
@@ -391,12 +404,6 @@ class RegisterVisit(QDialog):
         print(idPatient)
         print(choosedata)
         print(idDoctor)
-
-        cur = connection.cursor()
-        cur.execute("Insert into visit(idDoctor, idPatient, dateVisit) values('" + str(idDoctor) + "', '" + str(
-            idPatient) + "', '" + str(choosedata) + "');")
-        connection.commit()
-
 
 class ShowVisits(QDialog):
 
