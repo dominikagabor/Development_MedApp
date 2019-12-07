@@ -275,16 +275,15 @@ class ShowPatients(QDialog):
                 for row in value:
                     self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
 
-
     def valueFind(self):
         self.listWidget.clear()
         valueFind = self.valueFindEditText.text()
         print(valueFind)
         cur = connection.cursor()
-        if valueFind is not None:
-            query = "select Pesel, Surname, Name from patients where Surname = '" + valueFind + "' OR Name = '" + valueFind + "' OR Pesel = '" + valueFind + "' OR City = '" + valueFind + "' OR PostCode = '" + valueFind + "' OR Phone = '" + valueFind + "' OR Street = '" + valueFind + "' OR Mail = '" + valueFind + "'"
+        if valueFind == "":
+            query = "select Pesel, Surname, Name from patients;"
         else:
-            query = "select Pesel, Surname, Name from patients"
+            query = "select Pesel, Surname, Name from patients where Surname = '" + valueFind + "' OR Name = '" + valueFind + "' OR Pesel = '" + valueFind + "' OR City = '" + valueFind + "' OR PostCode = '" + valueFind + "' OR Phone = '" + valueFind + "' OR Street = '" + valueFind + "' OR Mail = '" + valueFind + "'"
         cur.execute(query)
         value = cur.fetchall()
 
