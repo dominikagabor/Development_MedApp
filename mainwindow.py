@@ -19,7 +19,7 @@ class Login(QDialog):
         loadUi('gui/loginGui.ui', self)
         self.loginButton.clicked.connect(self.checkData)
         self.mW = MainWindow()
-        self.widget.setPixmap(QPixmap("image/logo.PNG"))
+        self.backgroundLabel.setPixmap(QPixmap("image/logo.PNG"))
 
     def accepted(self):
         self.mW.show()
@@ -32,8 +32,8 @@ class Login(QDialog):
 
     def checkData(self):
 
-        login = self.loginline.text()
-        password = self.passwordline.text()
+        login = self.passwordEditLine.text()
+        password = self.passwordEditLine.text()
 
         if login and password != '':
             cur = connection.cursor()
@@ -71,11 +71,12 @@ class MainWindow(QDialog):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi('gui/mainWindowGui.ui', self)
-        self.AddPatientButton.clicked.connect(self.patient)
-        self.registerButton.clicked.connect(self.register)
+        self.registerPatientButton.clicked.connect(self.patient)
+        self.registerUserButton.clicked.connect(self.register)
         self.endButton.clicked.connect(self.end)
         self.showPatientsButton.clicked.connect(self.showPatients)
-        self.VisitsButton.clicked.connect(self.registervisit)
+        self.registerVisitButton.clicked.connect(self.registervisit)
+        self.widget.setPixmap(QPixmap("image/logo.PNG"))
         self.p = Patients()
         self.r = Register()
         self.s = ShowPatients()
@@ -104,7 +105,7 @@ class MainWindow(QDialog):
 class Patients(QDialog):
     def __init__(self):
         super(Patients, self).__init__()
-        loadUi('gui/AddPatientsGui.ui', self)
+        loadUi('gui/registerPatientGui.ui', self)
         self.saveButton.clicked.connect(self.insertToDatabase)
         self.cancelButton.clicked.connect(self.cancel)
 
@@ -119,50 +120,66 @@ class Patients(QDialog):
         QMessageBox.information(self, 'Komunikat', 'Pacjent dodany poprawnie.')
         self.close()
 
-    def messageboxSex(self):
-        QMessageBox.information(self, 'Komunikat', 'Wybierz płeć.')
-
-    def messageboxWrongPesel(self):
-        QMessageBox.information(self, 'Komunikat', 'Pesel niepoprawny. Pesel musi posiadać 11 cyfr.')
+    def messageboxEmpty(self):
+        QMessageBox.information(self, 'Komunikat', 'Muszą zostać uzupełnione wszystkie pola')
 
     def insertToDatabase(self):
         name = self.nameEditText.text()
+        print(name)
         surname = self.surnameEditText.text()
+        print(surname)
         pesel = self.peselEditText.text()
+        print(pesel)
         birthdate = self.birthDateEditText.text()
+        print(birthdate)
         street = self.streetEditText.text()
+        print(street)
         houseNumer = self.houseNumerEditText.text()
-        city = self.cityEditText.text()
-        postCode = self.postCodeEditText.text()
+        print(houseNumer)
         flat = self.numberFlatEditText.text()
+        print(flat)
+        city = self.cityEditText.text()
+        print(city)
+        postCode = self.postCodeEditText.text()
+        print(postCode)
         phone = self.phoneEditText.text()
+        print(phone)
         email = self.emailEditText.text()
+        print(email)
         nameAuthorizedPerson = self.nameAuthorizedPersonEditText.text()
+        print(nameAuthorizedPerson)
         surnameAuthorizedPerson = self.surnameAuthorizedPersonEditText.text()
+        print(surnameAuthorizedPerson)
         peselAuthorizedPerson = self.peselAuthorizedPersonEditText.text()
+        print(peselAuthorizedPerson)
         phoneAuthorizedPerson = self.phoneAuthorizedPersonEditText.text()
+        print(phoneAuthorizedPerson)
 
-        print(len(pesel))
-
-        if len(pesel) != 11 or len(peselAuthorizedPerson) != 11:
-            self.messageboxWrongPesel()
-        else:
-            if self.womanRadioButton.isChecked():
-                sex = 'kobieta'
-            elif self.menRadioButton.isChecked():
+        if self.womanRadioButton.isChecked():
+               sex = 'kobieta'
+        elif self.menRadioButton.isChecked():
                 sex = 'mężczyzna'
 
-            cur = connection.cursor()
-            cur.execute("Insert into patients(Name, Surname, Pesel, BirthDate, Street, House, Flat, City, PostCode, Phone, Mail, NameAuthorizedPerson, SurnameAuthorizedPerson, PeselAuthorizedPerson, PhoneAuthorizedPerson, Sex) values('" + name + "', '" + surname + "', '" + pesel + "', '" + birthdate + "', '" + street + "', '" + houseNumer + "', '" + flat + "', '" + city + "', '" + postCode + "', '" + phone + "', '" + email + "', '" + nameAuthorizedPerson + "', '" + surnameAuthorizedPerson + "', '" + peselAuthorizedPerson + "', '" + phoneAuthorizedPerson + "', '" + sex + "')")
-            connection.commit()
-            self.messagebox()
+        dane = [name, surname, pesel, birthdate, street, houseNumer, flat, city, postCode, phone, email, nameAuthorizedPerson, surnameAuthorizedPerson, peselAuthorizedPerson, phoneAuthorizedPerson, sex]
+
+        for x in dane:
+            if x != "":
+                try:
+                    cur = connection.cursor()
+                    cur.execute("Insert into patients(Name, Surname, Pesel, BirthDate, Street, House, Flat, City, PostCode, Phone, Mail, NameAuthorizedPerson, SurnameAuthorizedPerson, PeselAuthorizedPerson, PhoneAuthorizedPerson, Sex) values('" + name + "', '" + surname + "', '" + pesel + "', '" + birthdate + "', '" + street + "', '" + houseNumer + "', '" + flat + "', '" + city + "', '" + postCode + "', '" + phone + "', '" + email + "', '" + nameAuthorizedPerson + "', '" + surnameAuthorizedPerson + "', '" + peselAuthorizedPerson + "', '" + phoneAuthorizedPerson + "', '" + sex + "')")
+                    connection.commit()
+                    self.messagebox()
+                except Exception as e:
+                    print(str(e))
+            else:
+                self.messageboxEmpty()
 
 
 class Register(QDialog):
 
     def __init__(self):
         super(Register, self).__init__()
-        loadUi('gui/registerGui.ui', self)
+        loadUi('gui/registerUserGui.ui', self)
         self.registerButton.clicked.connect(self.register)
         self.cancelButton.clicked.connect(self.cancel)
 

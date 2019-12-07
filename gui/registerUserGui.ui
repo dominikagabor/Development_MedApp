@@ -56,6 +56,9 @@
      <bold>true</bold>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Podaj hasło:</string>
    </property>
@@ -75,6 +78,9 @@
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Podaj nazwę użytkownika:</string>
@@ -147,6 +153,9 @@
      <bold>true</bold>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Powtórz hasło:</string>
    </property>
@@ -170,11 +179,14 @@
    <property name="focusPolicy">
     <enum>Qt::NoFocus</enum>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(34, 148, 255); color: rgb(255, 255, 255)</string>
+   </property>
    <property name="text">
     <string>Anuluj</string>
    </property>
   </widget>
-  <widget class="QLabel" name="userNameLabel_2">
+  <widget class="QLabel" name="registerUserLabel">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -189,6 +201,9 @@
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>REJESTRACJA UŻYTKOWNIKA</string>
@@ -209,6 +224,9 @@
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(34, 148, 255); color: rgb(255, 255, 255)</string>
    </property>
    <property name="text">
     <string>Zarejestruj</string>

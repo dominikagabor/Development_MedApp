@@ -37,6 +37,9 @@
      <pointsize>14</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Kwestionariusz  Pacjenta</string>
    </property>
@@ -55,6 +58,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Imię</string>
    </property>
@@ -72,6 +78,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Pesel</string>
@@ -101,6 +110,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Nazwisko</string>
    </property>
@@ -128,6 +140,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Data urodzenia</string>
@@ -157,6 +172,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Płeć</string>
    </property>
@@ -174,6 +192,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Ulica</string>
@@ -203,6 +224,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Nr domu</string>
    </property>
@@ -230,6 +254,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Nr mieszkania</string>
@@ -259,6 +286,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Telefon</string>
    </property>
@@ -286,6 +316,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Adres e-mail</string>
@@ -315,6 +348,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Imię osoby upoważnionej</string>
    </property>
@@ -343,6 +379,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Nazwisko osoby upoważnionej</string>
    </property>
@@ -370,6 +409,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Pesel osoby upoważnionej</string>
@@ -402,6 +444,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(34, 148, 255); color: rgb(255, 255, 255)</string>
+   </property>
    <property name="text">
     <string>Zapisz</string>
    </property>
@@ -419,6 +464,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Miasto</string>
@@ -438,6 +486,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
+   </property>
    <property name="text">
     <string>Kod Pocztowy</string>
    </property>
@@ -455,6 +506,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
     <string>Telefon osoby upoważnionej</string>
@@ -515,6 +569,9 @@
     <font>
      <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(34, 148, 255); color: rgb(255, 255, 255)</string>
    </property>
    <property name="text">
     <string>Anuluj</string>
