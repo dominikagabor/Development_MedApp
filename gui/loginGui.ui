@@ -92,7 +92,7 @@
     <string>Zaloguj się</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="passwordEditLine_2">
+  <widget class="QLineEdit" name="loginEditLine">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -190,7 +190,7 @@
   <zorder>userNameLabel</zorder>
   <zorder>passwordLabel</zorder>
   <zorder>loginButton</zorder>
-  <zorder>passwordEditLine_2</zorder>
+  <zorder>loginEditLine</zorder>
   <zorder>passwordEditLine</zorder>
   <zorder>openGLWidget</zorder>
  </widget>

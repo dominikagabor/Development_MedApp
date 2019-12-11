@@ -32,7 +32,7 @@ class Login(QDialog):
 
     def checkData(self):
 
-        login = self.passwordEditLine.text()
+        login = self.loginEditLine.text()
         password = self.passwordEditLine.text()
 
         if login and password != '':
@@ -56,15 +56,19 @@ class Login(QDialog):
                 global now_id
                 now_id = id_user
                 self.accepted()
+                cur.close()
+                self.close()
 
             if countlogin == 0:
                 self.messagebox()
+                self.loginEditLine.setText("")
+                self.passwordEditLine.setText("")
 
-            cur.close()
-            self.close()
 
         else:
             self.messagebox_emptyscope()
+            self.loginEditLine.setText("")
+            self.passwordEditLine.setText("")
 
 
 class MainWindow(QDialog):
@@ -76,11 +80,16 @@ class MainWindow(QDialog):
         self.endButton.clicked.connect(self.end)
         self.showPatientsButton.clicked.connect(self.showPatients)
         self.registerVisitButton.clicked.connect(self.registervisit)
-        self.widget.setPixmap(QPixmap("image/logo.PNG"))
+        self.addDoctorButton.clicked.connect(self.addDoctor)
+        self.widget.setPixmap(QPixmap("image/logo1.PNG"))
         self.p = Patients()
         self.r = Register()
         self.s = ShowPatients()
         self.w = RegisterVisit()
+        self.d = AddDoctor()
+
+    def addDoctor(self):
+        self.d.show()
 
     def registervisit(self):
         self.w.show()
@@ -98,6 +107,7 @@ class MainWindow(QDialog):
         if buttonReply == QMessageBox.Yes:
             app.closeAllWindows()
 
+
     def showPatients(self):
         self.s.show()
 
@@ -108,6 +118,7 @@ class Patients(QDialog):
         loadUi('gui/registerPatientGui.ui', self)
         self.saveButton.clicked.connect(self.insertToDatabase)
         self.cancelButton.clicked.connect(self.cancel)
+
 
     def cancel(self):
         buttonReply = QMessageBox.question(self, 'Question', "Czy napewno chcesz anulować dodawanie pacjenta?",
@@ -177,6 +188,20 @@ class Patients(QDialog):
                     "Insert into patients(Name, Surname, Pesel, BirthDate, Street, House, Flat, City, PostCode, Phone, Mail, NameAuthorizedPerson, SurnameAuthorizedPerson, PeselAuthorizedPerson, PhoneAuthorizedPerson, Sex) values('" + name + "', '" + surname + "', '" + pesel + "', '" + birthdate + "', '" + street + "', '" + houseNumer + "', '" + flat + "', '" + city + "', '" + postCode + "', '" + phone + "', '" + email + "', '" + nameAuthorizedPerson + "', '" + surnameAuthorizedPerson + "', '" + peselAuthorizedPerson + "', '" + phoneAuthorizedPerson + "', '" + sex + "')")
                 connection.commit()
                 self.messagebox()
+                self.nameEditText.setText("")
+                self.surnameEditText.setText("")
+                self.peselEditText.setText("")
+                self.streetEditText.setText("")
+                self.houseNumerEditText.setText("")
+                self.numberFlatEditText.setText("")
+                self.cityEditText.setText("")
+                self.postCodeEditText.setText("")
+                self.phoneEditText.setText("")
+                self.emailEditText.setText("")
+                self.nameAuthorizedPersonEditText.setText("")
+                self.surnameAuthorizedPersonEditText.setText("")
+                self.peselAuthorizedPersonEditText.setText("")
+                self.phoneAuthorizedPersonEditText.setText("")
             except Exception as e:
                 print(str(e))
 
@@ -249,6 +274,7 @@ class ShowPatients(QDialog):
         loadUi('gui/showPatientsGui.ui', self)
         self.valueFindButton.clicked.connect(self.valueFind)
         self.valueFindComboboxButton.clicked.connect(self.comboBoxFilters)
+        self.closeButton.clicked.connect(self.closeWindow)
 
         self.comboBox.addItem("-")
         self.comboBox.addItem("daty urodzenia rosnąco")
@@ -297,6 +323,10 @@ class ShowPatients(QDialog):
             if (rowCount[0]) != 0:
                 for row in value:
                     self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
+
+    def closeWindow(self):
+        self.close()
+        self.valueFindEditText.setText("")
 
     def comboBoxFilters(self):
         valueFind = self.valueFindEditText.text()
@@ -354,10 +384,6 @@ class RegisterVisit(QDialog):
         for row in count:
             self.comboBox.addItem(str(row[0]))
 
-    def messagebox(self):
-        QMessageBox.information(self, 'Komunikat', 'Wizyta dodana poprawnie')
-        self.close()
-
     def messageboxEmptyPatient(self):
         QMessageBox.information(self, 'Komunikat', 'Podany pesel nie istnieje w bazie')
 
@@ -373,6 +399,7 @@ class RegisterVisit(QDialog):
 
         choosedata = self.calendarWidget.selectedDate().toString('yyyy-MM-dd')
         pesel = self.lineEdit.text()
+        time = self.timeEdit.time().toString()
 
         cur = connection.cursor()
         query = "select idpatients from patients where Pesel like '" + pesel + "';"
@@ -385,25 +412,43 @@ class RegisterVisit(QDialog):
             self.messageboxEmptyPatient()
         else:
             cur = connection.cursor()
-            cur.execute("Insert into visit(idDoctor, idPatient, dateVisit) values('" + str(idDoctor) + "', '" + str(
-                idPatient) + "', '" + str(choosedata) + "');")
+            cur.execute("Insert into visit(idDoctor, idPatient, dateVisit, timeVisit) values('" + str(idDoctor) + "', '" + str(
+                idPatient) + "', '" + str(choosedata) + "', '" + str(time) + "');")
             connection.commit()
-            self.messagebox()
+            QMessageBox.information(self, 'Komunikat', 'Wizyta w dniu ' + str(
+                choosedata) + ' o godzinie ' + str(time) + ' dodana poprawnie.')
+            self.close()
+            self.lineEdit.setText("")
 
 
-        # time = self.timeEdit.time()
-        # print(time)
+class AddDoctor(QDialog):
+    def __init__(self):
+        super(AddDoctor, self).__init__()
+        loadUi('gui/addDoctorGui.ui', self)
+        self.registerButton.clicked.connect(self.register)
+        self.cancelButton.clicked.connect(self.cancel)
 
-        # Poprawić - wyświetlanie pacjentów
-        # Dodawanie wizyty - komunikaty, dodanie godziny wizyty.
-        # Ostatni moduł - wyświetl szczegoły wizyty - analogicznie do wyswietlania pacjentow
-        # Połączyć tablice - Pesel | Nazwisko | Imię | Data | Godzina | Lekarz
-        # table Patients - Pesel, Surname, name
-        # table Visit - Date, Time, Doktor (table Doctors)
+    def register(self):
+        name = self.doctorNameEditText.text()
+        surname = self.doctorSurnameEditText.text()
+        specjalization = self.doctorSpecjalizationEditText.text()
 
-        print(idPatient)
-        print(choosedata)
-        print(idDoctor)
+        cur = connection.cursor()
+        cur.execute("Insert into doctors(name, surname, specjalization) values('" + name + "', '" + surname + "', '" + specjalization + "')")
+        connection.commit()
+        QMessageBox.information(self, 'Komunikat', 'Doktor ' + str(surname) + ' ' + str(name) + ' został/a poprawnie dodany.')
+        self.close()
+        self.doctorNameEditText.setText("")
+        self.doctorSurnameEditText.setText("")
+        self.doctorSpecjalizationEditText.setText("")
+
+    def cancel(self):
+        buttonReply = QMessageBox.question(self, 'Question', "Czy napewno chcesz anulować operację dodawania lekarza?",
+                                           QMessageBox.Yes | QMessageBox.No,
+                                           QMessageBox.Yes)
+        if buttonReply == QMessageBox.Yes:
+            self.close()
+
 
 class ShowVisits(QDialog):
 

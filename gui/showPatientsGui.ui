@@ -154,6 +154,30 @@
     <string>Sortuj pacjenta:</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>460</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(34, 148, 255); color: rgb(255, 255, 255)</string>
+   </property>
+   <property name="text">
+    <string>Zamknij</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

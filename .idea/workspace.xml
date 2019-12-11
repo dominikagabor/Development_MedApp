@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8b3ac437-780b-4773-8f76-7817aaacfe6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/RegisterVisit.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/loginGui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/gui/loginGui.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/mainWindowGui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/gui/mainWindowGui.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/showPatientsGui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/gui/showPatientsGui.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainwindow.py" afterDir="false" />
     </list>
@@ -18,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainwindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="384" column="20" selection-start-line="384" selection-start-column="20" selection-end-line="384" selection-end-column="20" />
+            <state relative-caret-position="184">
+              <caret line="327" column="20" lean-forward="true" selection-start-line="327" selection-start-column="20" selection-end-line="327" selection-end-column="20" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -46,6 +47,7 @@
       <find>AddPatient</find>
       <find>combobox</find>
       <find>combob</find>
+      <find>insert</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -64,10 +66,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1632" />
-    <option name="y" value="99" />
-    <option name="width" value="1382" />
-    <option name="height" value="745" />
+    <option name="x" value="170" />
+    <option name="y" value="91" />
+    <option name="width" value="1026" />
+    <option name="height" value="546" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -75,7 +77,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -97,6 +98,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -179,16 +181,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10695469" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.106398806" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49479166" visible="true" weight="0.13542795" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.68154764" weight="0.39869988" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49479166" visible="true" weight="0.26350245" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.68154764" weight="0.39770868" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -231,13 +233,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/virtaul_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/virtaul_base.py" />
     <entry file="file://$PROJECT_DIR$/gui/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -250,8 +246,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mainwindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="384" column="20" selection-start-line="384" selection-start-column="20" selection-end-line="384" selection-end-column="20" />
+        <state relative-caret-position="184">
+          <caret line="327" column="20" lean-forward="true" selection-start-line="327" selection-start-column="20" selection-end-line="327" selection-end-column="20" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
