@@ -81,12 +81,17 @@ class MainWindow(QDialog):
         self.showPatientsButton.clicked.connect(self.showPatients)
         self.registerVisitButton.clicked.connect(self.registervisit)
         self.addDoctorButton.clicked.connect(self.addDoctor)
+        self.showVisitButton.clicked.connect(self.showVisit)
         self.widget.setPixmap(QPixmap("image/logo1.PNG"))
         self.p = Patients()
         self.r = Register()
         self.s = ShowPatients()
         self.w = RegisterVisit()
         self.d = AddDoctor()
+        self.sv = ShowVisits()
+
+    def showVisit(self):
+        self.sv.show()
 
     def addDoctor(self):
         self.d.show()
@@ -375,6 +380,7 @@ class RegisterVisit(QDialog):
         super(RegisterVisit, self).__init__()
         loadUi('gui/registerVisitGui.ui', self)
         self.saveButton.clicked.connect(self.datechoose)
+        self.cancelButton.clicked.connect(self.closeWindow)
 
         cur = connection.cursor()
         queryCount = "select surname, name, specjalization from doctors;"
@@ -383,6 +389,13 @@ class RegisterVisit(QDialog):
 
         for row in count:
             self.comboBox.addItem(str(row[0]))
+
+    def closeWindow(self):
+        buttonReply = QMessageBox.question(self, 'Question', "Czy napewno chcesz anulować?",
+                                           QMessageBox.Yes | QMessageBox.No,
+                                           QMessageBox.Yes)
+        if buttonReply == QMessageBox.Yes:
+            self.close()
 
     def messageboxEmptyPatient(self):
         QMessageBox.information(self, 'Komunikat', 'Podany pesel nie istnieje w bazie')
@@ -455,96 +468,10 @@ class ShowVisits(QDialog):
     def __init__(self):
         super(ShowVisits, self).__init__()
         loadUi('gui/showVisitsGui.ui', self)
-        self.valueFindButton.clicked.connect(self.valueFind)
-        self.comboboxButton.clicked.connect(self.comboBoxFilters)
+        self.closeButton.clicked.connect(self.closeWindow)
 
-        self.comboBox.addItem("-")
-        self.comboBox.addItem("daty urodzenia rosnąco")
-        self.comboBox.addItem("daty urodzenia malejąco")
-        self.comboBox.addItem("nazwiska od a do z")
-        self.comboBox.addItem("nazwiska od z do a")
-        self.comboBox.addItem("pesel rosnąco")
-        self.comboBox.addItem("pesel malejąco")
-
-        self.listWidget.clear()
-        cur = connection.cursor()
-        query = "select Pesel, Surname, Name from patients;"
-        cur.execute(query)
-        value = cur.fetchall()
-
-        queryCount = "select count(Pesel) from patients;"
-        cur.execute(queryCount)
-        count = cur.fetchall()
-
-        for rowCount in count:
-            if (rowCount[0]) == 0:
-                self.listWidget.addItem("BRAK DANYCH W BAZIE")
-            if (rowCount[0]) != 0:
-                for row in value:
-                    self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
-
-    def valueFind(self):
-        self.listWidget.clear()
-        valueFind = self.valueFindEditText.text()
-        print(valueFind)
-        cur = connection.cursor()
-        if valueFind is not None:
-            query = "select Pesel, Surname, Name from patients where Surname = '" + valueFind + "' OR Name = '" + valueFind + "' OR Pesel = '" + valueFind + "' OR City = '" + valueFind + "' OR PostCode = '" + valueFind + "' OR Phone = '" + valueFind + "' OR Street = '" + valueFind + "' OR Mail = '" + valueFind + "'"
-        else:
-            query = "select Pesel, Surname, Name from patients"
-        cur.execute(query)
-        value = cur.fetchall()
-
-        queryCount = "select count(Pesel) from patients;"
-        cur.execute(queryCount)
-        count = cur.fetchall()
-
-        for rowCount in count:
-            if (rowCount[0]) == 0:
-                self.listWidget.addItem("BRAK DANYCH W BAZIE")
-            if (rowCount[0]) != 0:
-                for row in value:
-                    self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
-
-    def comboBoxFilters(self):
-        valueFind = self.valueFindEditText.text()
-        combotext = self.comboBox.currentText()
-        if combotext == '-':
-            dod = ''
-        elif combotext == 'daty urodzenia rosnąco':
-            dod = 'order by birthDate ASC'
-        elif combotext == 'daty urodzenia malejąco':
-            dod = 'order by birthDate DESC'
-        elif combotext == 'nazwiska od a do z':
-            dod = 'order by Surname ASC'
-        elif combotext == 'nazwiska od z do a':
-            dod = 'order by Surname DESC'
-        elif combotext == 'pesel rosnąco':
-            dod = 'order by Pesel ASC'
-        elif combotext == 'pesel malejąco':
-            dod = 'order by Pesel DESC'
-        else:
-            dod = ''
-
-        self.listWidget.clear()
-        cur = connection.cursor()
-        if valueFind is not None:
-            query = "select Pesel, Surname, Name from patients where Surname = '" + valueFind + "' OR Name = '" + valueFind + "' OR Pesel = '" + valueFind + "' OR City = '" + valueFind + "' OR PostCode = '" + valueFind + "' OR Phone = '" + valueFind + "' OR Street = '" + valueFind + "' OR Mail = '" + valueFind + "'" + dod
-        else:
-            query = "select Pesel, Surname, Name from patients " + dod
-        cur.execute(query)
-        value = cur.fetchall()
-
-        queryCount = "select count(Pesel) from patients;"
-        cur.execute(queryCount)
-        count = cur.fetchall()
-
-        for rowCount in count:
-            if (rowCount[0]) == 0:
-                self.listWidget.addItem("BRAK DANYCH W BAZIE")
-            if (rowCount[0]) != 0:
-                for row in value:
-                    self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]))
+    def closeWindow(self):
+        self.close()
 
 
 if __name__ == '__main__':
