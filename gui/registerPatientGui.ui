@@ -62,15 +62,15 @@
     <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
-    <string>Imię</string>
+    <string>Imię*</string>
    </property>
   </widget>
   <widget class="QLabel" name="peselLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>110</y>
-     <width>41</width>
+     <width>51</width>
      <height>21</height>
     </rect>
    </property>
@@ -83,7 +83,7 @@
     <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
-    <string>Pesel</string>
+    <string>Pesel*</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="surnameEditText">
@@ -99,9 +99,9 @@
   <widget class="QLabel" name="surnameLabel">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>340</x>
      <y>50</y>
-     <width>61</width>
+     <width>71</width>
      <height>41</height>
     </rect>
    </property>
@@ -114,7 +114,7 @@
     <string notr="true">color: rgb(34, 148, 255)</string>
    </property>
    <property name="text">
-    <string>Nazwisko</string>
+    <string>Nazwisko*</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="peselEditText">

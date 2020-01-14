@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b3ac437-780b-4773-8f76-7817aaacfe6d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/registerPatientGui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/gui/registerPatientGui.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/showVisitsGui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/gui/showVisitsGui.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainwindow.py" afterDir="false" />
     </list>
@@ -16,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainwindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1496">
-              <caret line="467" lean-forward="true" selection-start-line="467" selection-end-line="467" />
+            <state relative-caret-position="529">
+              <caret line="528" lean-forward="true" selection-start-line="528" selection-end-line="528" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -45,6 +47,7 @@
       <find>combobox</find>
       <find>combob</find>
       <find>insert</find>
+      <find>visit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -63,10 +66,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="170" />
-    <option name="y" value="91" />
-    <option name="width" value="1026" />
-    <option name="height" value="546" />
+    <option name="x" value="-7" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -80,16 +82,6 @@
             <path>
               <item name="ProjektInżynierski2" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProjektInżynierski2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjektInżynierski2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjektInżynierski2" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjektInżynierski2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjektInżynierski2" type="462c0819:PsiDirectoryNode" />
-              <item name="image" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -178,15 +170,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.106398806" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.02232143" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49479166" visible="true" weight="0.26350245" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49479166" visible="true" weight="0.27332243" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.68154764" weight="0.39770868" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -243,8 +235,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mainwindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="467" lean-forward="true" selection-start-line="467" selection-end-line="467" />
+        <state relative-caret-position="529">
+          <caret line="528" lean-forward="true" selection-start-line="528" selection-end-line="528" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

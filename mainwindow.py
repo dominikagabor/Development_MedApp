@@ -137,7 +137,7 @@ class Patients(QDialog):
         self.close()
 
     def messageboxEmpty(self):
-        QMessageBox.information(self, 'Komunikat', 'Muszą zostać uzupełnione wszystkie pola')
+        QMessageBox.information(self, 'Komunikat', 'Muszą zostać uzupełnione wszystkie wymagane pola.')
 
     def insertToDatabase(self):
         name = self.nameEditText.text()
@@ -186,29 +186,27 @@ class Patients(QDialog):
             else:
                 empty = 2
 
-        if empty == 1:
-            try:
-                cur = connection.cursor()
-                cur.execute(
+        if name and surname and pesel != '':
+         if empty == 1:
+                    cur = connection.cursor()
+                    cur.execute(
                     "Insert into patients(Name, Surname, Pesel, BirthDate, Street, House, Flat, City, PostCode, Phone, Mail, NameAuthorizedPerson, SurnameAuthorizedPerson, PeselAuthorizedPerson, PhoneAuthorizedPerson, Sex) values('" + name + "', '" + surname + "', '" + pesel + "', '" + birthdate + "', '" + street + "', '" + houseNumer + "', '" + flat + "', '" + city + "', '" + postCode + "', '" + phone + "', '" + email + "', '" + nameAuthorizedPerson + "', '" + surnameAuthorizedPerson + "', '" + peselAuthorizedPerson + "', '" + phoneAuthorizedPerson + "', '" + sex + "')")
-                connection.commit()
-                self.messagebox()
-                self.nameEditText.setText("")
-                self.surnameEditText.setText("")
-                self.peselEditText.setText("")
-                self.streetEditText.setText("")
-                self.houseNumerEditText.setText("")
-                self.numberFlatEditText.setText("")
-                self.cityEditText.setText("")
-                self.postCodeEditText.setText("")
-                self.phoneEditText.setText("")
-                self.emailEditText.setText("")
-                self.nameAuthorizedPersonEditText.setText("")
-                self.surnameAuthorizedPersonEditText.setText("")
-                self.peselAuthorizedPersonEditText.setText("")
-                self.phoneAuthorizedPersonEditText.setText("")
-            except Exception as e:
-                print(str(e))
+                    connection.commit()
+                    self.messagebox()
+                    self.nameEditText.setText("")
+                    self.surnameEditText.setText("")
+                    self.peselEditText.setText("")
+                    self.streetEditText.setText("")
+                    self.houseNumerEditText.setText("")
+                    self.numberFlatEditText.setText("")
+                    self.cityEditText.setText("")
+                    self.postCodeEditText.setText("")
+                    self.phoneEditText.setText("")
+                    self.emailEditText.setText("")
+                    self.nameAuthorizedPersonEditText.setText("")
+                    self.surnameAuthorizedPersonEditText.setText("")
+                    self.peselAuthorizedPersonEditText.setText("")
+                    self.phoneAuthorizedPersonEditText.setText("")
 
         else:
             self.messageboxEmpty()
@@ -228,6 +226,9 @@ class Register(QDialog):
                                            QMessageBox.Yes)
         if buttonReply == QMessageBox.Yes:
             self.close()
+            self.userNameEditText.setText("")
+            self.passwordEditText.setText("")
+            self.passwordAgainEditText.setText("")
 
     def messageboxWrongPasswords(self):
         QMessageBox.warning(self, 'Komunikat', 'Hasła są różne.')
@@ -263,9 +264,13 @@ class Register(QDialog):
                     cur.execute("Insert into login(login, password) values('" + login + "', '" + password + "')")
                     connection.commit()
                     self.messagebox()
+                    self.userNameEditText.setText("")
+                    self.passwordEditText.setText("")
+                    self.passwordAgainEditText.setText("")
 
                 else:
                     self.messageboxEmptyScope()
+
             else:
                 self.messageboxWrongPasswords()
         else:
@@ -398,7 +403,10 @@ class RegisterVisit(QDialog):
             self.close()
 
     def messageboxEmptyPatient(self):
-        QMessageBox.information(self, 'Komunikat', 'Podany pesel nie istnieje w bazie')
+        QMessageBox.information(self, 'Komunikat', 'Podany pesel nie istnieje w bazie.')
+
+    def messageboxEmptyPesel(self):
+        QMessageBox.information(self, 'Komunikat', 'Pole Pesel nie może być puste.')
 
     def datechoose(self):
         nameDoctor = self.comboBox.currentText()
@@ -424,14 +432,15 @@ class RegisterVisit(QDialog):
         if str(idPatient) == '[]':
             self.messageboxEmptyPatient()
         else:
-            cur = connection.cursor()
-            cur.execute("Insert into visit(idDoctor, idPatient, dateVisit, timeVisit) values('" + str(idDoctor) + "', '" + str(
-                idPatient) + "', '" + str(choosedata) + "', '" + str(time) + "');")
-            connection.commit()
-            QMessageBox.information(self, 'Komunikat', 'Wizyta w dniu ' + str(
-                choosedata) + ' o godzinie ' + str(time) + ' dodana poprawnie.')
-            self.close()
-            self.lineEdit.setText("")
+            if pesel != "":
+                cur = connection.cursor()
+                cur.execute("Insert into visitt(iddoctor, idpatient, date, time) values('" + str(idDoctor) + "', '" + str(idPatient) + "', '" + str(choosedata) + "', '" + str(time) + "');")
+                connection.commit()
+                QMessageBox.information(self, 'Komunikat', 'Wizyta w dniu ' + str(choosedata) + ' o godzinie ' + str(time) + ' dodana poprawnie.')
+                self.close()
+                self.lineEdit.setText("")
+            else:
+                self.messageboxEmptyPesel()
 
 
 class AddDoctor(QDialog):
@@ -441,19 +450,24 @@ class AddDoctor(QDialog):
         self.registerButton.clicked.connect(self.register)
         self.cancelButton.clicked.connect(self.cancel)
 
+    def messageboxEmpty(self):
+        QMessageBox.information(self, 'Komunikat', 'Pola nie mogą być puste.')
+
     def register(self):
         name = self.doctorNameEditText.text()
         surname = self.doctorSurnameEditText.text()
         specjalization = self.doctorSpecjalizationEditText.text()
-
-        cur = connection.cursor()
-        cur.execute("Insert into doctors(name, surname, specjalization) values('" + name + "', '" + surname + "', '" + specjalization + "')")
-        connection.commit()
-        QMessageBox.information(self, 'Komunikat', 'Doktor ' + str(surname) + ' ' + str(name) + ' został/a poprawnie dodany.')
-        self.close()
-        self.doctorNameEditText.setText("")
-        self.doctorSurnameEditText.setText("")
-        self.doctorSpecjalizationEditText.setText("")
+        if name and surname and specjalization != '':
+            cur = connection.cursor()
+            cur.execute("Insert into doctors(name, surname, specjalization) values('" + name + "', '" + surname + "', '" + specjalization + "')")
+            connection.commit()
+            QMessageBox.information(self, 'Komunikat', 'Doktor ' + str(surname) + ' ' + str(name) + ' został/a poprawnie dodany.')
+            self.close()
+            self.doctorNameEditText.setText("")
+            self.doctorSurnameEditText.setText("")
+            self.doctorSpecjalizationEditText.setText("")
+        else:
+            self.messageboxEmpty()
 
     def cancel(self):
         buttonReply = QMessageBox.question(self, 'Question', "Czy napewno chcesz anulować operację dodawania lekarza?",
@@ -461,6 +475,9 @@ class AddDoctor(QDialog):
                                            QMessageBox.Yes)
         if buttonReply == QMessageBox.Yes:
             self.close()
+            self.doctorNameEditText.setText("")
+            self.doctorSurnameEditText.setText("")
+            self.doctorSpecjalizationEditText.setText("")
 
 
 class ShowVisits(QDialog):
@@ -469,6 +486,42 @@ class ShowVisits(QDialog):
         super(ShowVisits, self).__init__()
         loadUi('gui/showVisitsGui.ui', self)
         self.closeButton.clicked.connect(self.closeWindow)
+        self.valueFindButton.clicked.connect(self.comboBoxFilters)
+        self.comboBox.addItem("Lekarzy")
+        self.comboBox.addItem("Pacjentów")
+        self.listWidget.clear()
+
+    def messageboxEmpty2(self):
+        QMessageBox.information(self, 'Komunikat', 'Brak danych w bazie.')
+
+    def comboBoxFilters(self):
+
+        filter = self.EditText.text()
+        combotext = self.comboBox.currentText()
+        date1 = self.dateEdit.text()
+        date2 = self.dateEdit_2.text()
+
+        if combotext == 'Lekarzy':
+            dod = 'd.surname'
+        elif combotext == 'Pacjentów':
+            dod = 'p.Pesel'
+
+        self.listWidget.clear()
+        cur = connection.cursor()
+        query="SELECT p.Name, p.Surname, p.Pesel, d.name, d.surname, v.date, v.time  FROM patients p join visitt v on p.idpatients=v.idpatient join doctors d on d.iddoctors=v.iddoctor where " + dod + " = '" + filter + "' and v.date between '" + date1 + "' and '" + date2 + "';"
+        cur.execute(query)
+        value = cur.fetchall()
+
+        queryCount = "select count(idvisitt) FROM patients p join visitt v on p.idpatients=v.idpatient join doctors d on d.iddoctors=v.iddoctor where " + dod + " = '" + filter + "' and v.date between '" + date1 + "' and '" + date2 + "';"
+        cur.execute(queryCount)
+        count = cur.fetchall()
+
+        for rowCount in count:
+            if (rowCount[0]) == 0:
+                self.messageboxEmpty2()
+            elif (rowCount[0]) != 0:
+                for row in value:
+                    self.listWidget.addItem(str(row[0]) + " " + str(row[1]) + " " + str(row[2]) + " " + str(row[3]) + " " + str(row[4]) + " " + str(row[5]) + " " + str(row[6]))
 
     def closeWindow(self):
         self.close()
@@ -480,3 +533,4 @@ if __name__ == '__main__':
     window.setWindowTitle('MedApp')
     window.show()
     sys.exit(app.exec())
+
